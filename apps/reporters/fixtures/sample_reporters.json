@@ -6,6 +6,7 @@
             "first_name": "Mark",
             "last_name": "Johnston",
             "registered_self": false,
+            "dob":"1980-10-01",
             "alias": "mej"
         }
     },
