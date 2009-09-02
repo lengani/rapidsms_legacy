@@ -3,7 +3,8 @@
 
 
 from django import http
-
+from apps.docmanager.models import File 
+import io
 
 def excel(data):
     def __table(t):
@@ -22,3 +23,13 @@ def excel(data):
     resp = http.HttpResponse(html, mimetype='application/vnd.ms-excel')
     resp["content-disposition"] = "attachment; filename=test.xls"
     return resp
+
+def download(req, id):
+    f= File.objects.get(id=id).file
+    f = io.FileIO(f.path,"rb+")
+    a = f.readall()
+    f.close()
+    resp= http.HttpResponse(a,mimetype='application')
+    resp['Content-Disposition'] = 'attachment;filename=%s' % f.name
+    return resp
+
